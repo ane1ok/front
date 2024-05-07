@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Клубника в шоколаде</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+  }
+
+  header {
+    background-color:#7f0303;
+    color: #fff;
+    text-align: center;
+    padding: 40px 0;
+    opacity: 0;
+    transform: translateY(-20%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+
+  header h1 {
+    margin-bottom: 10px;
+    font-size: 48px;
+  }
+
+  header p {
+    font-size: 18px;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+
+  .animated-image {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    opacity: 0;
+    transform: translateY(50%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .animated-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .catalog {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .item {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: center; /* Добавлено для центрирования содержимого */
+  }
+
+  .item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .item img {
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: block; /* Добавлено для корректного отображения по центру */
+    margin: 0 auto; /* Добавлено для центрирования изображения */
+  }
+
+  .item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .item p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <header id="main-header">
+    <h1>Клубника в шоколаде</h1>
+    <p>Изысканное удовольствие для вашего вкуса</p>
+  </header>
+  <div class="content">
+    <img src="11.jpg" alt="Клубника в шоколаде" class="animated-image" id="image1">
+    <img src="22.jpg" alt="Шоколад" class="animated-image" id="image2">
+  </div>
+  <div class="catalog">
+    <div class="item">
+      <img src="44.jpg" alt="Букет 1">
+      <h3>Букет "Белла"</h3>
+      <p>Прекрасный выбор для любого торжества!</p>
+    </div>
+    <div class="item">
+      <img src="55.jpg" alt="Букет 2">
+      <h3>Букет "Фрея"</h3>
+      <p>Нежные цветы, приносящие радость и вдохновение.</p>
+    </div>
+    <div class="item">
+      <img src="66.jpg" alt="Букет 3">
+      <h3>Букет "Изобилие"</h3>
+      <p>Идеальный подарок для особого случая.</p>
+    </div>
+  </div>
+  <script>
+    // Ожидаем, пока весь HTML загрузится и построится
+    document.addEventListener("DOMContentLoaded", function() {
+      // Получаем элемент заголовка по его id "main-header"
+      const header = document.getElementById("main-header");
+  
+      // Устанавливаем задержку в 500 миллисекунд перед началом анимации
+      setTimeout(() => {
+        // Плавное появление заголовка (изменяем свойства opacity и transform)
+        header.style.opacity = 1; // делаем элемент полностью видимым
+        header.style.transform = "translateY(0)"; // не сдвигаем элемент по вертикали (0 пикселей)
+      }, 500);
+  
+      // Получаем все элементы с классом "animated-image" (картинки)
+      const images = document.querySelectorAll(".animated-image");
+  
+      // Для каждой картинки создаем анимацию появления с задержкой
+      images.forEach((image, index) => {
+        setTimeout(() => {
+          image.style.opacity = 1; // делаем картинку полностью видимой
+          image.style.transform = "translateY(0)"; // не сдвигаем картинку по вертикали (0 пикселей)
+        }, 1000 + index * 500); // устанавливаем задержку перед анимацией (1000 миллисекунд + индекс * 500 миллисекунд)
+      });
+  
+      // Добавляем слушатель события "mousemove" для отслеживания движения мыши
+      document.addEventListener("mousemove", function(event) {
+        const mouseX = event.clientX; // получаем координату X курсора мыши
+        const mouseY = event.clientY; // получаем координату Y курсора мыши
+        const image1 = document.getElementById("image1"); // получаем первую картинку по её id
+        const image2 = document.getElementById("image2"); // получаем вторую картинку по её id
+  
+        const centerX = window.innerWidth / 2; // вычисляем центр по горизонтали окна
+        const centerY = window.innerHeight / 2; // вычисляем центр по вертикали окна
+  
+        // Вычисляем смещение для первой картинки относительно положения курсора мыши
+        const offsetX1 = (mouseX - centerX) / 30;
+        const offsetY1 = (mouseY - centerY) / 30;
+        image1.style.transform = `translate(${offsetX1}px, ${offsetY1}px)`; // применяем смещение
+  
+        // Вычисляем смещение для второй картинки относительно положения курсора мыши
+        const offsetX2 = (centerX - mouseX) / 30;
+        const offsetY2 = (centerY - mouseY) / 30;
+        image2.style.transform = `translate(${offsetX2}px, ${offsetY2}px)`; // применяем смещение
+      });
+    });
+  </script>
+  
+</body>
+</html>

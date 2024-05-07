@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #3498db; /* Background color of the body */
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #atm-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      color: #3498db; /* Heading color */
+    }
+
+    #balance-container {
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    #balance {
+      font-weight: bold;
+      font-size: 24px;
+      color: #2ecc71; /* Balance color */
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db; /* Button color */
+      color: #fff; /* Button text color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9; /* Button color on hover */
+    }
+  </style>
+  <title>Банкомат</title>
+</head>
+<body>
+  <div id="atm-container">
+    <h1>Банкомат</h1>
+    <div id="balance-container">
+      <p>Баланс: <span id="balance">0</span> руб.</p>
+    </div>
+    <button onclick="checkBalance()">Проверить баланс</button>
+    <button onclick="deposit()">Внести наличные</button>
+    <button onclick="withdraw()">Снять наличные</button>
+    <button onclick="transfer()">Перевести средства</button>
+    <button onclick="showHistory()">История операций</button>
+    <button onclick="changePin()">Изменить PIN-код</button>
+    <button onclick="exit()">Завершить работу</button>
+  </div>
+
+  <script>
+    let balance = 0;
+    let pinCode = 1234;
+    let transactionHistory = [];
+
+    function updateBalance() {
+      document.getElementById('balance').textContent = balance;
+    }
+
+    function checkBalance() {
+      alert(`Ваш баланс: ${balance} руб.`);
+    }
+
+    function deposit() {
+      let amount = parseFloat(prompt('Введите сумму для внесения:'));
+      if (!isNaN(amount) && amount > 0) {
+        balance += amount;
+        transactionHistory.push(`Внесение: +${amount} руб.`);
+        updateBalance();
+        alert('Операция выполнена успешно.');
+      } else {
+        alert('Некорректная сумма.');
+      }
+    }
+
+    function withdraw() {
+      let amount = parseFloat(prompt('Введите сумму для снятия:'));
+      if (!isNaN(amount) && amount > 0 && amount <= balance) {
+        balance -= amount;
+        transactionHistory.push(`Снятие: -${amount} руб.`);
+        updateBalance();
+        alert('Операция выполнена успешно.');
+      } else {
+        alert('Некорректная сумма или недостаточно средств на счете.');
+      }
+    }
+
+    function transfer() {
+      let amount = parseFloat(prompt('Введите сумму для перевода:'));
+      if (!isNaN(amount) && amount > 0 && amount <= balance) {
+        let recipient = prompt('Введите номер счета получателя:');
+        transactionHistory.push(`Перевод на счет ${recipient}: -${amount} руб.`);
+        balance -= amount;
+        updateBalance();
+        alert('Операция выполнена успешно.');
+      } else {
+        alert('Некорректная сумма или недостаточно средств на счете.');
+      }
+    }
+
+    function showHistory() {
+      alert('Последние операции:\n' + transactionHistory.join('\n'));
+    }
+
+    function changePin() {
+      let newPin = parseInt(prompt('Введите новый PIN-код:'));
+      if (!isNaN(newPin)) {
+        pinCode = newPin;
+        alert('PIN-код успешно изменен.');
+      } else {
+        alert('Некорректный PIN-код.');
+      }
+    }
+
+    function exit() {
+      alert('Спасибо за использование банкомата. До свидания!');
+      // Здесь вы можете добавить дополнительные действия при завершении работы банкомата.
+    }
+
+    // Инициализация начального баланса при загрузке страницы
+    updateBalance();
+  </script>
+</body>
+</html>

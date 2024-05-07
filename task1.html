@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Космическое путешествие</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('bg.jpg');
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #0066cc;
+        }
+
+        .result {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <script>
+        let spacecraftName = prompt("Введите название космического корабля:");
+        let spaceshipSpeed = prompt("Введите скорость корабля (миля/ч):");
+        const distanceToMarsKm = 225000000;
+        const distanceToMoonKm = 384400;
+        const milesInOneKm = 0.621;
+
+        
+        console.log("Тип spacecraftName:", typeof spacecraftName);
+        console.log("Тип spaceshipSpeed:", typeof spaceshipSpeed);
+        console.log("Тип distanceToMarsKm:", typeof distanceToMarsKm);
+
+        const distanceToMarsMiles = distanceToMarsKm * milesInOneKm;
+        const hoursToMars = distanceToMarsMiles / spaceshipSpeed;
+        const daysToMars = hoursToMars / 24;
+
+        // Вывод результатов
+        console.log("Расстояние до Марса в километрах:", distanceToMarsKm);
+        console.log("Расстояние до Марса в милях:", distanceToMarsMiles);
+        console.log("Скорость корабля:", spaceshipSpeed, "миля/ч");
+        console.log(`${spacecraftName} понадобится ${daysToMars.toFixed(2)} дней, чтобы добраться до Марса`);
+
+    
+        console.log("Тип distanceToMoonKm:", typeof distanceToMoonKm);
+        const distanceToMoonMiles = distanceToMoonKm * milesInOneKm;
+        const hoursToMoon = distanceToMoonMiles / spaceshipSpeed;
+        const daysToMoon = hoursToMoon / 24;
+
+        // Вывод результатов
+        console.log("Расстояние до Луны в километрах:", distanceToMoonKm);
+        console.log("Расстояние до Луны в милях:", distanceToMoonMiles);
+        console.log(`${spacecraftName} понадобится ${daysToMoon.toFixed(2)} дней, чтобы добраться до Луны`);
+    </script>
+
+</body>
+</html>

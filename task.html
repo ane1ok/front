@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аудио Плеер</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.audio-player {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: #600562;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #660c51;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.volume-icon {
+  width: 20px;
+  margin-right: 5px;
+}
+
+.volume-slider {
+  width: 100px;
+}
+</style>
+</head>
+<body>
+
+<div class="audio-player">
+  <h2 id="songTitle">Музыкальный Плеер</h2>
+  <audio src="" id="audioPlayer"></audio>
+  <div>
+    <button onclick="togglePlayPause()">Воспроизвести</button>
+    <button onclick="prevTrack()">Предыдущая</button>
+    <button onclick="nextTrack()">Следующая</button>
+  </div>
+  <div class="volume-control">
+    <img src="volume.png" alt="Volume Icon" class="volume-icon">
+    <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="changeVolume()">
+  </div>
+  <input type="range" id="seekSlider" min="0" value="0" step="1" onchange="seekTo()">
+  <div id="currentTime">0:00</div>
+  <div id="duration">0:00</div>
+</div>
+
+<script>
+let playlist = [
+  { title: 'Blinding Lights', file: 'song1.mp3', duration: 192 },
+  { title: 'Moth to a flame', file: 'song2.mp3', duration: 213 },
+  { title: 'Legend', file: 'song3.mp3', duration: 151 }
+];
+
+let currentIndex = 0;
+let audioPlayer = document.getElementById('audioPlayer');
+let songTitle = document.getElementById('songTitle');
+let playPauseButton = document.querySelector('button');
+let volumeSlider = document.getElementById('volumeSlider');
+let seekSlider = document.getElementById('seekSlider');
+let currentTime = document.getElementById('currentTime');
+let durationText = document.getElementById('duration');
+
+function loadTrack(index) {
+  let track = playlist[index];
+  audioPlayer.src = track.file;
+  songTitle.textContent = track.title;
+  durationText.textContent = formatTime(track.duration);
+  seekSlider.max = track.duration;
+}
+
+function togglePlayPause() {
+  if (audioPlayer.paused) {
+    audioPlayer.play();
+    playPauseButton.textContent = 'Пауза';
+  } else {
+    audioPlayer.pause();
+    playPauseButton.textContent = 'Воспроизвести';
+  }
+}
+
+function prevTrack() {
+  currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+  loadTrack(currentIndex);
+  audioPlayer.play();
+}
+
+function nextTrack() {
+  currentIndex = (currentIndex + 1) % playlist.length;
+  loadTrack(currentIndex);
+  audioPlayer.play();
+}
+
+function changeVolume() {
+  audioPlayer.volume = volumeSlider.value;
+}
+
+function seekTo() {
+  audioPlayer.currentTime = seekSlider.value;
+}
+
+function updateProgress() {
+  seekSlider.value = audioPlayer.currentTime;
+  currentTime.textContent = formatTime(audioPlayer.currentTime);
+}
+
+function formatTime(seconds) {
+  let minutes = Math.floor(seconds / 60);
+  let remainingSeconds = Math.floor(seconds % 60);
+  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+}
+
+audioPlayer.addEventListener('timeupdate', updateProgress);
+
+audioPlayer.addEventListener('ended', () => {
+  currentIndex = (currentIndex + 1) % playlist.length;
+  loadTrack(currentIndex);
+  audioPlayer.play();
+});
+
+loadTrack(currentIndex);
+</script>
+
+</body>
+</html>

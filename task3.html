@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таймер обратного отсчета</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('wall.png');
+            text-align: center;
+            padding: 50px;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #timer {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Таймер обратного отсчета</h1>
+    <p id="timer">До Нового года осталось: 0 дней 00:00:00</p>
+
+    <script>
+        const endDate = new Date("2024-12-31T23:59:59").getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const timeRemaining = endDate - now;
+
+            if (timeRemaining <= 0) {
+                clearInterval(timerInterval);
+                document.getElementById("timer").innerHTML = "Привет, 2025!";
+            } else {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = `До Нового года осталось: ${days} дней ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+            }
+        }
+
+        function formatTime(time) {
+            return time < 10 ? `0${time}` : time;
+        }
+
+        //обновления каждую секунду
+        const timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>

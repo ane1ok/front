@@ -1,0 +1,102 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Фильтр новостей</title> 
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .news {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .news-item {
+        width: calc(30% - 20px);
+        margin: 10px;
+        background-color: #e0e0e0; /* Светло-серый фон */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .news-item:hover {
+        transform: scale(1.03);
+    }
+
+    .news-item h2 {
+        margin-top: 0;
+        font-size: 1.2em;
+        color: #333; /* Цвет текста */
+    }
+
+    .filter-buttons {
+        margin-bottom: 20px;
+    }
+</style>
+
+</head> 
+<body> 
+<div class="container"> 
+    <div class="filter-buttons"> 
+        <button onclick="filterNews('all')">Все новости</button> 
+        <button onclick="filterNews('политика')">Политика</button> 
+        <button onclick="filterNews('спорт')">Спорт</button> 
+        <button onclick="filterNews('культура')">Культура</button> 
+    </div> 
+    <div class="news"> 
+        <div class="news-item" data-category="политика"> 
+            <h2>Новость о политике</h2> 
+            <p>Текст новости о политике...</p> 
+        </div> 
+        <div class="news-item" data-category="спорт"> 
+            <h2>Новость о спорте</h2> 
+            <p>Текст новости о спорте...</p> 
+        </div> 
+        <div class="news-item" data-category="культура"> 
+            <h2>Новость о культуре</h2> 
+            <p>Текст новости о культуре...</p> 
+        </div> 
+        <div class="news-item" data-category="политика"> 
+            <h2>Еще новость о политике</h2> 
+            <p>Еще текст новости о политике...</p> 
+        </div> 
+        <div class="news-item" data-category="спорт"> 
+            <h2>Еще новость о спорте</h2> 
+            <p>Еще текст новости о спорте...</p> 
+        </div> 
+        <div class="news-item" data-category="культура"> 
+            <h2>Еще новость о культуре</h2> 
+            <p>Еще текст новости о культуре...</p> 
+        </div> 
+    </div> 
+</div> 
+<script> 
+    function filterNews(category) { 
+        var newsItems = document.querySelectorAll('.news-item'); 
+ 
+        newsItems.forEach(function(item) { 
+            if (category === 'all' || item.getAttribute('data-category') === category) { 
+                item.style.display = 'block'; 
+            } else { 
+                item.style.display = 'none'; 
+            } 
+        }); 
+    } 
+</script> 
+</body> 
+</html>

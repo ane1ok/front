@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Именная плитка</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        var name = prompt("Введите ваше имя:");
+        if (name !== null && name !== "") {
+            
+            var price = 5;
+            var quantity = name.length;
+            var total = price * name.length;
+            var greeting = "Добро пожаловать,";
+            var delivery = 0.05 * total;
+            var final = total + delivery;
+
+            
+            document.write("<h2>" + greeting + " " + name + "!</h2>");
+            document.write("<p>Цена за одну плитку: $" + price + "</p>");
+            document.write("<p>Количество плиток: " + quantity + "</p>");
+            document.write("<p>Общая стоимость заказа: $" + total + "</p>");
+            document.write("<p>Цена доставки (5%): $" + delivery.toFixed(2) + "</p>");
+            document.write("<p>Итоговая стоимость заказа: $" + final.toFixed(2) + "</p>");
+        } 
+        else {
+            alert("Имя не введено. Пожалуйста, обновите страницу и введите ваше имя.");
+        }
+    </script>
+</body>
+</html>

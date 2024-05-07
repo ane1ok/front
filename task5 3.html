@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фильтр товаров</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #productContainer {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .productItem {
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="productContainer">
+    <h2>Фильтр товаров</h2>
+    <form id="filterForm">
+        <label for="category">Категория:</label>
+        <select id="category" name="category">
+            <option value="electronics">Электроника</option>
+            <option value="clothing">Одежда</option>
+            
+        </select>
+
+        <label for="priceFrom">Цена от:</label>
+        <input type="number" id="priceFrom" name="priceFrom" min="0">
+
+        <label for="priceTo">Цена до:</label>
+        <input type="number" id="priceTo" name="priceTo" min="0">
+
+        <button type="button" onclick="filterProducts()">Применить фильтры</button>
+    </form>
+
+    <div id="productList">
+        <div class="productItem" data-category="electronics" data-price="1500">Товар 1 (Электроника, 1500 тг)</div>
+        <div class="productItem" data-category="clothing" data-price="3000">Товар 2 (Одежда, 3000 тг)</div>
+        <div class="productItem" data-category="electronics" data-price="5000">Товар 3 (Электроника, 5000 тг)</div>
+        
+    </div>
+</div>
+
+<script>
+    function filterProducts() {
+    var categoryFilter = document.getElementById("category").value;
+    var priceFromFilter = parseFloat(document.getElementById("priceFrom").value) || 0;
+    var priceToFilter = parseFloat(document.getElementById("priceTo").value) || Infinity;
+
+    var productItems = document.getElementsByClassName("productItem");
+
+    Array.from(productItems).forEach(function(productItem) {
+        var productCategory = productItem.getAttribute("data-category");
+        var productPrice = parseFloat(productItem.getAttribute("data-price"));
+
+        var categoryMatch = categoryFilter === 'all' || productCategory === categoryFilter;
+        var priceMatch = productPrice >= priceFromFilter && productPrice <= priceToFilter;
+
+        if (categoryMatch && priceMatch) {
+            productItem.style.display = 'block';
+        } else {
+            productItem.style.display = 'none';
+        }
+    });
+}
+
+</script>
+
+</body>
+</html>

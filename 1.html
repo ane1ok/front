@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клубника в шоколаде</title>
+    <style>
+      
+        /* Общие стили */
+    body {
+      font-family: Arial, sans-serif; /* Используемый шрифт */
+      margin: 0;
+      padding: 0;
+      margin-top: 0;
+    }
+
+    header {
+      margin-bottom: 0;
+      background-color: #7f0303;
+      padding: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header img {
+      width: 100px; /* Размер логотипа */
+    }
+
+    header h1 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff; /* Цвет заголовка */
+      margin: 0; /* Убираем внешние отступы */
+    }
+
+    nav ul {
+      list-style-type: none; /* Убираем маркеры списка */
+      padding: 0;
+      margin: 0;
+      justify-content: center
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 20px; /* Расстояние между пунктами меню */
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff; /* Цвет ссылок в меню */
+    }
+
+    nav ul li a:hover {
+      color: #000; /* Цвет ссылок при наведении */
+    }
+        section {
+            padding: 20px;
+        }
+        
+        footer {
+            background-color: #7f0303;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+
+  .animated-image {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    opacity: 0;
+    transform: translateY(50%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .animated-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .catalog {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .item {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: center; /* Добавлено для центрирования содержимого */
+  }
+
+  .item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .item img {
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: block; /* Добавлено для корректного отображения по центру */
+    margin: 0 auto; /* Добавлено для центрирования изображения */
+  }
+
+  .item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .item p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .social-info {
+      display: none; /* Начинаем с скрытого состояния текста */
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px; /* Уменьшаем размер текста */
+    }
+     /* Стили для кнопок */
+     .add-to-cart, .add-to-favorites {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #b01d22; /*  цвет кнопки */
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .add-to-cart:hover, .add-to-favorites:hover {
+      background-color: #531f1f; /*  цвет кнопки при наведении */
+    }
+     /* Стили для кнопок */
+     .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #b01d22;; /* цвет кнопки при наведении */
+      color: #531f1f;
+    }
+
+    /* Стили для контейнера с кнопками */
+    .button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.intro {
+    min-height: calc(100vh - 223px); /* Высота экрана минус высота нижнего отступа */
+    background: url(background2.jpg) no-repeat center;
+    background-size: cover;
+    padding-top: 180px;
+    padding-bottom: 100px; /* Уменьшенная высота нижнего отступа */
+}
+
+.intro__title{
+    max-width: 619px;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 60px;
+    color: white;
+    margin-bottom: 22px;
+}
+.intro__subtitle{
+    max-width: 546px;
+    color: white;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 59px;
+}
+.search-form__info{
+    display: flex;
+    flex-wrap: wrap;  
+}
+.search-form__field{
+    width: 297px;
+    background: transparent url(circle-ico.svg) no-repeat left 6px;
+    background-size: 20px;
+    border: 0;
+    border-bottom:  2px solid #BFC0C5;
+    margin-right: 60px;
+    padding-left: 43px;
+    padding-bottom: 22px;
+    font-size: 500;
+    font-size: 18px;
+    color: white;
+}
+.search-form__field::placeholder{
+    font-size: 500;
+    font-size: 18px;
+    color: white;
+}
+.search-form__submit{
+    padding: 15px 39px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 24px;
+    color: white;
+    background: #7f0303;
+    border: 0;
+}
+
+.search-form__submit:hover, .search-form__submit:focus, .search-form__submit:active{
+    background: #7f0303;
+}
+
+/* Стили для раздела "О нас" */
+#about {
+    padding: 20px;
+}
+
+/* Стили для текста в разделе "О нас" */
+#about p {
+    margin-bottom: 20px;
+}
+
+/* Стили для изображений в галерее */
+.image-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.image-gallery img {
+    width: 300px;
+    height: 300px;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Places styles start */
+
+.places {
+    margin-bottom: 131px;
+}
+
+.places__caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+}
+
+.places__title {
+    margin-right: 15px;
+}
+
+.places__cards {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+.places__card{
+    position: relative;
+    overflow: hidden;
+}
+
+.places__card:hover .places__card-pic{
+    transform: scale(1.05);
+}
+
+
+.places__card_size_lg {
+    grid-column: span 3;
+}
+
+.places__card_size_sm {
+    grid-column: span 2;
+}
+
+.places__card-pic {
+    width: 100%;
+    transition: .15s all;
+}
+
+.places__card-pic_size_lg {
+    height: 354px;
+    object-fit: cover;
+}
+.places__card-pic_size_sm {
+    height: 283px;
+    object-fit: cover;
+}
+
+
+/* Places styles end */
+
+/* Стили для блока с информацией о социальных сетях */
+.social-info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Стили для ссылок внутри блока с информацией о социальных сетях */
+.social-info a {
+    color: #333;
+    text-decoration: none;
+}
+
+.social-info a:hover {
+    text-decoration: underline;
+}
+
+#contact {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Стили для поля ввода текста */
+#userText {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Стили для кнопки */
+#addTextBtn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Стили для кнопки при наведении */
+#addTextBtn:hover {
+    background-color: #45a049;
+}
+
+/* Стили для отзыва */
+.review {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Стили для текста отзыва */
+.review p {
+    margin: 0;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="logo.png" alt="Логотип">
+        </div>
+        <div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#catalog">Каталог</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="intro">
+      <div class="wrapper">
+          <h1 class="intro__title">
+            Клубника в шоколаде          </h1>
+          <p class="intro__subtitle">
+            Мы рады приветствовать вас на нашем сайте. Мы специализируемся на клубнике в шоколаде высокого качества </p>
+          <form class="search-form">
+              <fieldset class="search-form_wrap">
+              <p class="search-form__info">
+                  <input type="text" name="user like to do" class="search-form__field" placeholder="Что можно подарить?">
+                  <input type="text" name="user like to do" class="search-form__field" placeholder="Какой букет выбрать?">
+                  <button type="submit" class="search-form__submit" a href="#catalog">Перейти в каталог</button>
+                 
+              </p>
+
+              </fieldset>
+          </form>
+      </div>
+  </section>
+    <div class="content">
+      <h1>Наши бестселлеры</h1>
+      <img src="11.jpg" alt="Клубника в шоколаде" class="animated-image" id="image1">
+      <img src="22.jpg" alt="Шоколад" class="animated-image" id="image2">
+
+      <input type="text" id="userText" placeholder="Введите ваш отзыв">
+      <button id="addTextBtn">Добавить отзыв</button>
+
+      <div id="content">
+        <p>Отзывы наших клиентов:</p>
+      </div>
+
+    </div>
+    <section id="catalog">
+      <div class="catalog">
+        <h1>Каталог</h1>
+        <div class="item">
+          <img src="44.jpg" alt="Букет 1">
+          <h3>Букет "Белла"</h3>
+          <p>Прекрасный выбор для любого торжества!</p>
+          <button class="add-to-cart">Добавить в корзину</button>
+          <button class="add-to-favorites">Добавить в избранное</button>
+        </div>
+        <div class="item">
+          <img src="55.jpg" alt="Букет 2">
+          <h3>Букет "Фрея"</h3>
+          <p>Нежные цветы, приносящие радость и вдохновение.</p>
+          <button class="add-to-cart">Добавить в корзину</button>
+          <button class="add-to-favorites">Добавить в избранное</button>
+        </div>
+        <div class="item">
+          <img src="66.jpg" alt="Букет 3">
+          <h3>Букет "Изобилие"</h3>
+          <p>Идеальный подарок для особого случая.</p>
+          <button class="add-to-cart">Добавить в корзину</button>
+          <button class="add-to-favorites">Добавить в избранное</button>
+        </div>
+      </div>
+    </section>
+  
+    <section id="about">
+      <h2>О нас</h2>
+      <p>Мы компания, предлагающая высококачественную клубнику в шоколаде. Наша продукция производится из отборных ингредиентов с использованием лучших рецептов. Свежая, сочная и ароматная клубника – прекрасный подарок для любимой женщины, подруги, коллеги или родственницы. Особенно если она собрана в красивый букет, профессионально декорированный нашими фудфлористами и дополненный другими десертами или цветами.</p>
+      
+      <p>Такие композиции из клубники в шоколаде можно купить в нашем интернет-магазине – с пунктуальной доставкой по всему городу Алматы. Наши талантливые фудфлористы собирают сладкие ягоды в роскошные и ароматные букеты. При этом цена на них – всегда адекватная!</p>
+      
+      <p>Мы знаем, как сделать композицию впечатляющей. Используем свежие и ароматные ягоды – как местные, так и импортные. Собираем композицию прямо перед отправкой, чтобы сохранить сочность. Используем профессиональный декор, различные живые цветы и десерты – например, шоколад, маршмеллоу и кондитерскую глазурь. Привозим точно в оговорённое время. Композиция обязательно порадует получательницу!</p>
+  
+      <div class="image-gallery">
+          <img src="box.jpg" alt="Клубника в шоколаде">
+          <img src="sham.jpg" alt="Клубника в шоколаде">
+          <img src="cake.jpg" alt="Клубника в шоколаде">
+      </div>
+  </section>
+  
+    <!--Places start-->
+<section class="places">
+  <div class="wrapper-full">
+      <div class="places__caption">
+          <h2 class="places__title section-title">
+             Галерея самых изысканных букетов
+          </h2>
+      </div>
+
+      <div class="places__cards">
+         <figure class="places__card places__card_size_lg">
+          <img src="55.jpg" class="places__card-pic places__card-pic_size_lg"> 
+          <figcaption class="places__card-title">
+              
+          </figcaption>
+          <a href="#!"class="places__card-link"></a>
+         </figure>
+         <figure class="places__card places__card_size_lg">
+          <img src="66.jpg" class="places__card-pic places__card-pic_size_lg"> 
+          <figcaption class="places__card-title">
+              
+          </figcaption>
+          <a href="#!"class="places__card-link"></a>
+         </figure>
+         <figure class="places__card places__card_size_sm">
+          <img src="11.jpg" class="places__card-pic places__card-pic_size_sm"> 
+          <figcaption class="places__card-title">
+              
+          </figcaption>
+          <a href="#!"class="places__card-link"></a>
+         </figure>
+         <figure class="places__card places__card_size_sm">
+          <img src="22.jpg" class="places__card-pic places__card-pic_size_sm"> 
+          <figcaption class="places__card-title">
+              
+          </figcaption>
+          <a href="#!"class="places__card-link"></a>
+         </figure>
+         <figure class="places__card places__card_size_sm">
+          <img src="44.jpg" class="places__card-pic places__card-pic_size_sm"> 
+          <figcaption class="places__card-title">
+              
+          </figcaption>
+          <a href="#!"class="places__card-link"></a>
+         </figure>
+       
+      </div>
+  </div>
+</section>
+
+
+<!--Places end-->
+<section id="contact">
+        <h2>Контакты</h2>
+        <p>Свяжитесь с нами, чтобы сделать заказ или получить дополнительную информацию:</p>
+        <p>Email: info@strawberrychoco.com</p>
+        <p>Телефон: +1234567890</p>
+         <!-- Кнопки отдельно от каталога -->
+  <div class="button-container">
+    <!-- Кнопка "Изменить стиль" -->
+    <button id="changeStyleBtn" class="button">Изменить стиль</button>
+
+    <!-- Кнопка "Информация о социальных сетях" -->
+    <button id="socialInfoBtn" class="button">Информация о социальных сетях</button>
+  </div>
+
+    <!-- Блок с информацией о социальных сетях -->
+    <div class="social-info" id="socialInfo">
+      <p>Мы активно участвуем в социальных сетях:</p>
+      <p>Instagram: <a href="https://www.instagram.com/brandberries/" target="_blank">@brandberries</a></p>
+      <p>Facebook: <a href="https://www.facebook.com/brandberries/" target="_blank">facebook.com/brandberries</a></p>
+    </div>
+
+  </div>
+    </section>
+   
+
+    <script>
+      // Ожидаем, пока весь HTML загрузится и построится
+      document.addEventListener("DOMContentLoaded", function() {
+        // Получаем элемент заголовка по его id "main-header"
+        const header = document.getElementById("main-header");
+    
+        // Устанавливаем задержку в 500 миллисекунд перед началом анимации
+        setTimeout(() => {
+          // Плавное появление заголовка (изменяем свойства opacity и transform)
+          header.style.opacity = 1; // делаем элемент полностью видимым
+          header.style.transform = "translateY(0)"; // не сдвигаем элемент по вертикали (0 пикселей)
+        }, 500);
+    
+        // Получаем все элементы с классом "animated-image" (картинки)
+        const images = document.querySelectorAll(".animated-image");
+    
+        // Для каждой картинки создаем анимацию появления с задержкой
+        images.forEach((image, index) => {
+          setTimeout(() => {
+            image.style.opacity = 1; // делаем картинку полностью видимой
+            image.style.transform = "translateY(0)"; // не сдвигаем картинку по вертикали (0 пикселей)
+          }, 1000 + index * 500); // устанавливаем задержку перед анимацией (1000 миллисекунд + индекс * 500 миллисекунд)
+        });
+    
+        // Добавляем слушатель события "mousemove" для отслеживания движения мыши
+        document.addEventListener("mousemove", function(event) {
+          const mouseX = event.clientX; // получаем координату X курсора мыши
+          const mouseY = event.clientY; // получаем координату Y курсора мыши
+          const image1 = document.getElementById("image1"); // получаем первую картинку по её id
+          const image2 = document.getElementById("image2"); // получаем вторую картинку по её id
+    
+          const centerX = window.innerWidth / 2; // вычисляем центр по горизонтали окна
+          const centerY = window.innerHeight / 2; // вычисляем центр по вертикали окна
+    
+          // Вычисляем смещение для первой картинки относительно положения курсора мыши
+          const offsetX1 = (mouseX - centerX) / 30;
+          const offsetY1 = (mouseY - centerY) / 30;
+          image1.style.transform = `translate(${offsetX1}px, ${offsetY1}px)`; // применяем смещение
+    
+          // Вычисляем смещение для второй картинки относительно положения курсора мыши
+          const offsetX2 = (centerX - mouseX) / 30;
+          const offsetY2 = (centerY - mouseY) / 30;
+          image2.style.transform = `translate(${offsetX2}px, ${offsetY2}px)`; // применяем смещение
+        });
+      });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        var isPink = false; // Переменная для отслеживания текущего цвета фона
+  
+        // Изменение цвета фона при нажатии на кнопку
+        $('#changeStyleBtn').click(function() {
+          if (!isPink) {
+            $('body').css('background-color', '#ffc0cb'); // Розовый цвет фона
+            isPink = true;
+          } else {
+            $('body').css('background-color', '#f8f9fa'); // Возвращаем стандартный цвет фона
+            isPink = false;
+          }
+        });
+  
+        // Показываем или скрываем информацию о социальных сетях при нажатии на кнопку
+        $('#socialInfoBtn').click(function() {
+          $('#socialInfo').slideToggle();
+        });
+      });
+      
+      document.addEventListener('DOMContentLoaded', function() {
+    var addTextBtn = document.getElementById('addTextBtn');
+    var userText = document.getElementById('userText');
+    var content = document.getElementById('content');
+
+    addTextBtn.addEventListener('click', function() {
+        var userReview = document.createElement('div');
+        userReview.classList.add('review');
+        var reviewText = document.createElement('p');
+        reviewText.textContent = userText.value;
+        userReview.appendChild(reviewText);
+        content.appendChild(userReview);
+        userText.value = '';
+    });
+});
+    </script>
+</body>
+</html>

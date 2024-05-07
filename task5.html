@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор доставки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label, input, select {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="calculator">
+    <h2>Калькулятор доставки</h2>
+    <form id="deliveryForm">
+        <label for="country">Страна доставки:</label>
+        <select id="country" name="country">
+            <option value="kazakhstan">Казахстан</option>
+            <option value="usa">США</option>
+        </select>
+
+        <label for="weight">Вес груза (кг):</label>
+        <input type="number" id="weight" name="weight" min="0" required>
+
+        <label for="shippingMethod">Способ доставки:</label>
+        <select id="shippingMethod" name="shippingMethod">
+            <option value="standard">Стандартная доставка</option>
+            <option value="express">Экспресс-доставка</option>
+        </select>
+
+        <button type="button" onclick="calculateShipping()">Рассчитать стоимость доставки</button>
+    </form>
+
+    <h3 id="totalCost"></h3>
+</div>
+
+<script>
+    function calculateShipping() {
+        var country = document.getElementById("country").value;
+        var weight = parseFloat(document.getElementById("weight").value);
+        var shippingMethod = document.getElementById("shippingMethod").value;
+        
+        var totalCost = 0;
+
+        if (country === "kazakhstan") {
+            totalCost = 5 + Math.max(0, weight - 5) * 2;
+        } else {
+            if (country === "usa") {
+                totalCost = 10 + Math.max(0, weight - 5) * 2;
+            } else {
+                totalCost = Math.max(0, weight - 5) * 2;
+            }
+        }
+
+        if (shippingMethod === "express") {
+            totalCost *= 1.5;
+        }
+
+        document.getElementById("totalCost").textContent = "Общая сумма доставки $" + totalCost.toFixed(2);
+    }
+</script>
+
+
+</body>
+</html>

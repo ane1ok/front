@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стаж компании</title>
+</head>
+<body>
+    <script>
+        // Дата основания компании (год, месяц - 1, день)
+        var foundingDate = new Date(2010, 11, 21); // Месяцы в JavaScript начинаются с 0 (0 - январь, 11 - декабрь)
+
+        // Текущая дата
+        var currentDate = new Date();
+
+        // Разница в миллисекундах между текущей датой и датой основания
+        var timeDiff = currentDate - foundingDate;
+
+        // Преобразование миллисекунд в годы (приблизительно)
+        var years = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365.25));
+
+        // Вывод информации о стаже компании
+        console.log("Компания работает уже " + years + " лет.");
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Космическое путешествие</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('bg.jpg');
+            background-size: cover; 
+            margin: 25px;
+        }
+
+        h1 {
+            color: #0066cc;
+            font-weight: 700;
+            font-size: 30px;
+            text-align: center;
+            
+        }
+
+        .result {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <script>
+        let spacecraftName = prompt("Введите название космического корабля:");
+        let spaceshipSpeed = prompt("Введите скорость корабля (миля/ч):");
+        const distanceToMarsKm = 225000000;
+        const distanceToMoonKm = 384400;
+        const milesInOneKm = 0.621;
+
+       
+        const distanceToMarsMiles = distanceToMarsKm * milesInOneKm;
+        const hoursToMars = distanceToMarsMiles / spaceshipSpeed;
+        const daysToMars = hoursToMars / 24;
+        const distanceToMoonMiles = distanceToMoonKm * milesInOneKm;
+        const hoursToMoon = distanceToMoonMiles / spaceshipSpeed;
+        const daysToMoon = hoursToMoon / 24;
+    </script>
+
+    <h1>Космическое путешествие</h1>
+
+    <div class="result">
+        <p>Расстояние до Марса в километрах: <span id="distanceToMarsKm"></span></p>
+        <p>Расстояние до Марса в милях: <span id="distanceToMarsMiles"></span></p>
+        <p>Скорость корабля: <span id="spaceshipSpeed"></span> миля/ч</p>
+        <p><span id="spacecraftName"></span> понадобится <span id="daysToMars"></span> дней, чтобы добраться до Марса</p>
+
+        <p>Расстояние до Луны в километрах: <span id="distanceToMoonKm"></span></p>
+        <p>Расстояние до Луны в милях: <span id="distanceToMoonMiles"></span></p>
+        <p><span id="spacecraftName"></span> понадобится <span id="daysToMoon"></span> дней, чтобы добраться до Луны</p>
+    </div>
+
+    <script>
+        // Вставка данных в HTML
+        document.getElementById("distanceToMarsKm").innerText = distanceToMarsKm;
+        document.getElementById("distanceToMarsMiles").innerText = distanceToMarsMiles;
+        document.getElementById("spaceshipSpeed").innerText = spaceshipSpeed;
+        document.getElementById("spacecraftName").innerText = spacecraftName;
+        document.getElementById("daysToMars").innerText = daysToMars.toFixed(2);
+
+        document.getElementById("distanceToMoonKm").innerText = distanceToMoonKm;
+        document.getElementById("distanceToMoonMiles").innerText = distanceToMoonMiles;
+        document.getElementById("daysToMoon").innerText = daysToMoon.toFixed(2);
+    </script>
+
+</body>
+</html>
